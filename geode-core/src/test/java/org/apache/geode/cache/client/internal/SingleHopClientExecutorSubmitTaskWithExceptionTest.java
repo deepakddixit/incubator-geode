@@ -21,7 +21,7 @@ import com.jayway.awaitility.Awaitility;
 import org.apache.geode.test.junit.categories.UnitTest;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.contrib.java.lang.system.SystemErrRule;
+import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.junit.experimental.categories.Category;
 
 /**
@@ -32,7 +32,7 @@ import org.junit.experimental.categories.Category;
 public class SingleHopClientExecutorSubmitTaskWithExceptionTest {
 
   @Rule
-  public SystemErrRule systemErrRule = new SystemErrRule().enableLog();
+  public SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 
   /**
    * Refer: GEODE-2109 This test verifies that any exception thrown from forked thread is logged
@@ -46,15 +46,7 @@ public class SingleHopClientExecutorSubmitTaskWithExceptionTest {
       @Override
       public void run() {
         // test piece throwing exception
-        try {
-          throw new RuntimeException(erroMsg);
-        } catch (RuntimeException e) {
-          // We need to catch and write it to System err
-          // so as to read from SystemErrRule
-          // In actual scenario, Geode LoggingThreadGroup
-          // will handle this.
-          System.err.print(e);
-        }
+        throw new RuntimeException(erroMsg);
       }
     });
 
@@ -62,7 +54,7 @@ public class SingleHopClientExecutorSubmitTaskWithExceptionTest {
      * Sometimes need to wait for more than sec as thread execution takes time.
      */
     Awaitility.await("Waiting for exception").atMost(60l, TimeUnit.SECONDS).until(() -> {
-      systemErrRule.getLog().contains(erroMsg);
+      systemOutRule.getLog().contains(erroMsg);
     });
   }
 
