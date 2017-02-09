@@ -107,7 +107,10 @@ public class Bug51193DUnitTest extends JUnit4DistributedTestCase {
       ClientRegionFactory<String, String> crf =
           cache.createClientRegionFactory(ClientRegionShortcut.CACHING_PROXY);
 
-      crf.create(REGION_NAME);
+      Region<String, String> testRegion = crf.create(REGION_NAME);
+      testRegion.invalidateRegion();
+
+
     } finally {
       System.clearProperty(DistributionConfig.GEMFIRE_PREFIX + "CLIENT_FUNCTION_TIMEOUT");
     }
