@@ -128,27 +128,42 @@ public class LuceneServiceImpl implements InternalLuceneService {
     return getUniqueIndexName(indexName, regionPath) + regionSuffix;
   }
 
-  public static void validateRegionName(String name) {
-    if (name == null) {
-      throw new IllegalArgumentException(
-          LocalizedStrings.LocalRegion_NAME_CANNOT_BE_NULL.toLocalizedString());
-    }
-    if (name.isEmpty()) {
-      throw new IllegalArgumentException(
-          LocalizedStrings.LocalRegion_NAME_CANNOT_BE_EMPTY.toLocalizedString());
-    }
+  public enum validateCommandParameters {
+    REGION_PATH, INDEX_NAME;
 
-    if (name.startsWith("__")) {
-      throw new IllegalArgumentException(
-          "Region names may not begin with a double-underscore: " + name);
-    }
+    public void validateName(String name) {
+      if (name == null) {
+        throw new IllegalArgumentException(
+            LocalizedStrings.LocalRegion_NAME_CANNOT_BE_NULL.toLocalizedString());
+      }
+      if (name.isEmpty()) {
+        throw new IllegalArgumentException(
+            LocalizedStrings.LocalRegion_NAME_CANNOT_BE_EMPTY.toLocalizedString());
+      }
 
-    final Pattern NAME_PATTERN = Pattern.compile("[aA-zZ0-9-_./]+");
-    // Ensure the region only contains valid characters
-    Matcher matcher = NAME_PATTERN.matcher(name);
-    if (!matcher.matches()) {
-      throw new IllegalArgumentException(
-          "Region names may only be alphanumeric and may contain hyphens or underscores: " + name);
+      boolean iae = false;
+      String msg =
+          " names may only be alphanumeric, must not begin with double-underscores, but can contain hyphens";
+      Matcher matcher = null;
+      switch (this) {
+        case REGION_PATH:
+          matcher = Pattern.compile("[aA-zZ0-9-_./]+").matcher(name);
+          msg = "Region" + msg + ", underscores, or forward slashes: ";
+          iae = name.startsWith("__") || !matcher.matches();
+          break;
+        case INDEX_NAME:
+          matcher = Pattern.compile("[aA-zZ0-9-_.]+").matcher(name);
+          msg = "Index" + msg + " or underscores: ";
+          iae = name.startsWith("__") || !matcher.matches();
+          break;
+        default:
+          throw new IllegalArgumentException("Illegal option for validateName function");
+      }
+
+      // Ensure the region only contains valid characters
+      if (iae) {
+        throw new IllegalArgumentException(msg + name);
+      }
     }
   }
 
