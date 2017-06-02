@@ -68,26 +68,6 @@ public interface Cache extends GemFireCache {
   void close(boolean keepAlive);
 
   /**
-   * Creates a VM region using the specified RegionAttributes.
-   *
-   * @param name the name of the region to create
-   * @param aRegionAttributes the attributes of the root region
-   * @return the region object
-   * @throws RegionExistsException if a region is already in this cache
-   * @throws org.apache.geode.distributed.LeaseExpiredException if lease expired on distributed lock
-   *         for Scope.GLOBAL
-   * @throws TimeoutException if timed out getting distributed lock for Scope.GLOBAL
-   * @throws CacheClosedException if the cache is closed
-   * @throws IllegalStateException If the supplied RegionAttributes violate the
-   *         <a href="AttributesFactory.html#creationConstraints">region creation constraints</a>
-   *         with a region of the same name in another cache in the distributed system
-   * @deprecated as of GemFire 5.0, use {@link #createRegion} instead.
-   */
-  @Deprecated
-  <K, V> Region<K, V> createVMRegion(String name, RegionAttributes<K, V> aRegionAttributes)
-      throws RegionExistsException, TimeoutException;
-
-  /**
    * Creates a region using the specified RegionAttributes.
    *
    * @param name the name of the region to create

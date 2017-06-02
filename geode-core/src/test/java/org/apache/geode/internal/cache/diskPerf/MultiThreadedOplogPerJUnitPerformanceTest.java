@@ -116,7 +116,7 @@ public class MultiThreadedOplogPerJUnitPerformanceTest {
     dsf.setDiskDirs(dirs);
     factory.setDiskStoreName(dsf.create("perfTestRegion").getName());
     try {
-      region = cache.createVMRegion("perfTestRegion", factory.createRegionAttributes());
+      region = cache.createRegionFactory(factory.createRegionAttributes()).create("perfTestRegion");
     } catch (Exception e) {
       e.printStackTrace();
     }

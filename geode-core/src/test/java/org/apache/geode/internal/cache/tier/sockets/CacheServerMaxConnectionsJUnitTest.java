@@ -99,7 +99,7 @@ public class CacheServerMaxConnectionsJUnitTest {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setPoolName("junitPool");
     RegionAttributes attrs = factory.createRegionAttributes();
-    cache.createVMRegion(regionName, attrs);
+    cache.createRegionFactory(attrs).create(regionName);
   }
 
   /**

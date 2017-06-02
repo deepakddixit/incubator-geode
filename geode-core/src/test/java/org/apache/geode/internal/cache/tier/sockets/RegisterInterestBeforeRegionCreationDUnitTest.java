@@ -162,7 +162,7 @@ public class RegisterInterestBeforeRegionCreationDUnitTest extends JUnit4Distrib
             factory.setScope(Scope.DISTRIBUTED_ACK);
             factory.setMirrorType(MirrorType.KEYS_VALUES);
             RegionAttributes attrs = factory.createRegionAttributes();
-            cache.createVMRegion(REGION_NAME, attrs);
+            cache.createRegionFactory(attrs).create(REGION_NAME);
           }
         };
     return putFromServer;
@@ -197,7 +197,7 @@ public class RegisterInterestBeforeRegionCreationDUnitTest extends JUnit4Distrib
       factory.setScope(Scope.DISTRIBUTED_ACK);
       factory.setMirrorType(MirrorType.KEYS_VALUES);
       RegionAttributes attrs = factory.createRegionAttributes();
-      cache.createVMRegion(REGION_NAME, attrs);
+      cache.createRegionFactory(attrs).create(REGION_NAME);
     }
     CacheServerImpl server = (CacheServerImpl) cache.addCacheServer();
     assertNotNull(server);
@@ -233,7 +233,7 @@ public class RegisterInterestBeforeRegionCreationDUnitTest extends JUnit4Distrib
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setPoolName(p.getName());
     RegionAttributes attrs = factory.createRegionAttributes();
-    cache.createVMRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
     Region region = cache.getRegion(Region.SEPARATOR + REGION_NAME);
     assertNotNull(region);
     region.registerInterest("ALL_KEYS", InterestResultPolicy.NONE);

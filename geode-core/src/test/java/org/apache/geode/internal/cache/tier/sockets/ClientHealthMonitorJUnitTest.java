@@ -97,7 +97,7 @@ public class ClientHealthMonitorJUnitTest {
           .setReadTimeout(10000).setPingInterval(10000).setMinConnections(0).create("junitPool");
       AttributesFactory factory = new AttributesFactory();
       factory.setScope(Scope.DISTRIBUTED_ACK);
-      cache.createVMRegion(regionName, factory.createRegionAttributes());
+      cache.createRegionFactory(factory.createRegionAttributes()).create("whatever");
     } catch (Exception ex) {
       ex.printStackTrace();
       fail("Failed to initialize client");

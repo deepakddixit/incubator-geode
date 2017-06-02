@@ -543,7 +543,7 @@ public class RedundancyLevelTestBase extends JUnit4DistributedTestCase {
     factory.setEnableConflation(true);
     factory.setMirrorType(MirrorType.KEYS_VALUES);
     RegionAttributes attrs = factory.createRegionAttributes();
-    cache.createVMRegion(REGION_NAME, attrs);
+    cache.createRegionFactory(attrs).create(REGION_NAME);
 
     CacheServer server1 = cache.addCacheServer();
 

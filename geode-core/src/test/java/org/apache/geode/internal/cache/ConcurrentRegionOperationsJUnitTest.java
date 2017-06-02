@@ -419,8 +419,8 @@ public class ConcurrentRegionOperationsJUnitTest extends DiskRegionTestingBase {
       for (int i = 0; i < 10; i++) {
         map.put(Integer.valueOf(i), new ReentrantLock());
       }
-      region2 =
-          cache.createVMRegion("testRegion2", new AttributesFactory().createRegionAttributes());
+      region2 = cache.createRegionFactory(new AttributesFactory().createRegionAttributes())
+          .create("testRegion2");
     }
     this.startLine = new CyclicBarrier(numberOfPutsThreads + numberOfGetsThreads
         + numberOfDestroysThreads + numberOfClearThreads + numberOfForceRollThreads);

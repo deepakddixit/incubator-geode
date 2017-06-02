@@ -93,8 +93,7 @@ public class HABug36738DUnitTest extends JUnit4DistributedTestCase {
     factory.setScope(Scope.DISTRIBUTED_ACK);
     factory.setEnableConflation(true);
     factory.setDataPolicy(DataPolicy.REPLICATE);
-
-    cache.createVMRegion(REGION_NAME, factory.createRegionAttributes());
+    cache.createRegionFactory(factory.createRegionAttributes()).create(REGION_NAME);
 
     for (int i = 0; i < COUNT; i++) {
       ClientUpdateMessage clientMessage =

@@ -119,7 +119,7 @@ public class DiskRegByteArrayDUnitTest extends JUnit4CacheTestCase {
       factory.setDiskStoreName(cache.createDiskStoreFactory().setDiskDirs(dirs)
           .create("DiskRegByteArrayDUnitTest").getName());
       RegionAttributes attr = factory.create();
-      region = cache.createVMRegion("region", attr);
+      region = cache.createRegionFactory(attr).create("region");
     } catch (Exception ex) {
       ex.printStackTrace();
       fail(ex.toString());
@@ -138,7 +138,7 @@ public class DiskRegByteArrayDUnitTest extends JUnit4CacheTestCase {
       factory.setDiskStoreName(cache.createDiskStoreFactory().setDiskDirs(dirs)
           .create("DiskRegByteArrayDUnitTest").getName());
       RegionAttributes attr = factory.create();
-      region = cache.createVMRegion("region", attr);
+      region = cache.createRegionFactory(attr).create("region");
     } catch (Exception ex) {
       ex.printStackTrace();
       fail(ex.toString());

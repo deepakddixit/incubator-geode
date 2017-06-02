@@ -179,7 +179,7 @@ public abstract class CacheXml66DUnitTest extends CacheXmlTestCase {
     f.create("mypool");
     RegionAttributesCreation attrs = new RegionAttributesCreation(cache);
     attrs.setPoolName("mypool");
-    cache.createVMRegion("rootNORMAL", attrs);
+    cache.createRegionFactory(attrs).create("rootNORMAL");
     testXml(cache);
     Cache c = getCache();
     assertNotNull(c);
@@ -273,7 +273,7 @@ public abstract class CacheXml66DUnitTest extends CacheXmlTestCase {
     RegionAttributesCreation attrs = new RegionAttributesCreation(cache);
     attrs.setPoolName("mypool");
     attrs.setDataPolicy(DataPolicy.EMPTY); // required for multiuser mode
-    cache.createVMRegion("rootNORMAL", attrs);
+    cache.createRegionFactory(attrs).create("rootNORMAL");
     IgnoredException.addIgnoredException("Connection refused: connect");
     testXml(cache);
     Cache c = getCache();
@@ -485,7 +485,7 @@ public abstract class CacheXml66DUnitTest extends CacheXmlTestCase {
     bs.setPort(AvailablePortHelper.getRandomAvailableTCPPort());
     RegionAttributesCreation attrs = new RegionAttributesCreation(cache);
     attrs.setDataPolicy(DataPolicy.NORMAL);
-    cache.createVMRegion("rootNORMAL", attrs);
+    cache.createRegionFactory(attrs).create("rootNORMAL");
     testXml(cache);
     Cache c = getCache();
     assertNotNull(c);
@@ -513,7 +513,7 @@ public abstract class CacheXml66DUnitTest extends CacheXmlTestCase {
     bs.setPort(AvailablePortHelper.getRandomAvailableTCPPort());
     RegionAttributesCreation attrs = new RegionAttributesCreation(cache);
     attrs.setDataPolicy(DataPolicy.NORMAL);
-    cache.createVMRegion("rootNORMAL", attrs);
+    cache.createRegionFactory(attrs).create("rootNORMAL");
     testXml(cache);
     Cache c = getCache();
     assertNotNull(c);
@@ -2351,7 +2351,7 @@ public abstract class CacheXml66DUnitTest extends CacheXmlTestCase {
     }
     RegionAttributesCreation attrs = new RegionAttributesCreation(cache);
     attrs.setPoolName("mypool");
-    cache.createVMRegion("rootNORMAL", attrs);
+    cache.createRegionFactory(attrs).create("rootNORMAL");
     testXml(cache);
     Cache c = getCache();
     assertNotNull(c);
@@ -2375,7 +2375,7 @@ public abstract class CacheXml66DUnitTest extends CacheXmlTestCase {
     CacheCreation cache = new CacheCreation();
     RegionAttributesCreation attrs = new RegionAttributesCreation(cache);
     attrs.setPoolName("mypool");
-    cache.createVMRegion("rootNORMAL", attrs);
+    cache.createRegionFactory(attrs).create("rootNORMAL");
     IgnoredException expectedException = IgnoredException.addIgnoredException(
         LocalizedStrings.AbstractRegion_THE_CONNECTION_POOL_0_HAS_NOT_BEEN_CREATED
             .toLocalizedString("mypool"));
@@ -2474,7 +2474,7 @@ public abstract class CacheXml66DUnitTest extends CacheXmlTestCase {
     bs.setPort(AvailablePortHelper.getRandomAvailableTCPPort());
     RegionAttributesCreation attrs = new RegionAttributesCreation(cache);
     attrs.setDataPolicy(DataPolicy.NORMAL);
-    cache.createVMRegion("rootNORMAL", attrs);
+    cache.createRegionFactory(attrs).create("rootNORMAL");
     testXml(cache);
     Cache c = getCache();
     assertNotNull(c);
@@ -2796,7 +2796,7 @@ public abstract class CacheXml66DUnitTest extends CacheXmlTestCase {
     cache.setMessageSyncInterval(123);
     RegionAttributesCreation attrs = new RegionAttributesCreation(cache);
     attrs.setDataPolicy(DataPolicy.NORMAL);
-    cache.createVMRegion("rootNORMAL", attrs);
+    cache.createRegionFactory(attrs).create("rootNORMAL");
     testXml(cache);
     Cache c = getCache();
     assertNotNull(c);
@@ -2817,7 +2817,7 @@ public abstract class CacheXml66DUnitTest extends CacheXmlTestCase {
     bs.setPort(AvailablePortHelper.getRandomAvailableTCPPort());
     RegionAttributesCreation attrs = new RegionAttributesCreation(cache);
     attrs.setDataPolicy(DataPolicy.NORMAL);
-    cache.createVMRegion("rootNORMAL", attrs);
+    cache.createRegionFactory(attrs).create("rootNORMAL");
     testXml(cache);
     Cache c = getCache();
     assertNotNull(c);
@@ -2860,7 +2860,7 @@ public abstract class CacheXml66DUnitTest extends CacheXmlTestCase {
     bs.setPort(AvailablePortHelper.getRandomAvailableTCPPort());
     RegionAttributesCreation attrs = new RegionAttributesCreation(cache);
     attrs.setDataPolicy(DataPolicy.NORMAL);
-    cache.createVMRegion("rootNORMAL", attrs);
+    cache.createRegionFactory(attrs).create("rootNORMAL");
     testXml(cache);
   }
 

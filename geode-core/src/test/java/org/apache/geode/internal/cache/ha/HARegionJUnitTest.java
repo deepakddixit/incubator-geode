@@ -153,7 +153,7 @@ public class HARegionJUnitTest {
     factory.setEvictionAttributes(evAttr);
 
     RegionAttributes attrs = factory.createRegionAttributes();
-    Region region = cache.createVMRegion("TEST_REGION", attrs);
+    Region region = cache.createRegionFactory(attrs).create("TEST_REGION");
     region.put("key1", "value1");
     region.put("key2", "value2");
   }

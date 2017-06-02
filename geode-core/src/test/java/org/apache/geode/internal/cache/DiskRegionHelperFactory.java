@@ -88,7 +88,8 @@ public class DiskRegionHelperFactory {
     factory.setStatisticsEnabled(diskProps.getStatisticsEnabled());
 
     try {
-      region = cache.createVMRegion(diskProps.getRegionName(), factory.createRegionAttributes());
+      region = cache.createRegionFactory(factory.createRegionAttributes())
+          .create(diskProps.getRegionName());
     } catch (TimeoutException e) {
       throw new RuntimeException(" failed to create region due  to a TimeOutException " + e);
     } catch (RegionExistsException e) {

@@ -2840,12 +2840,6 @@ public class GemFireCacheImpl implements InternalCache, InternalClientCache, Has
     }
   }
 
-  @Override
-  public <K, V> Region<K, V> createVMRegion(String name, RegionAttributes<K, V> aRegionAttributes)
-      throws RegionExistsException, TimeoutException {
-    return createRegion(name, aRegionAttributes);
-  }
-
   private PoolFactory createDefaultPF() {
     PoolFactory defaultPoolFactory = PoolManager.createFactory();
     try {

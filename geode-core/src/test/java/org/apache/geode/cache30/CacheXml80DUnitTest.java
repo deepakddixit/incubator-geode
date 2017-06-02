@@ -180,7 +180,7 @@ public class CacheXml80DUnitTest extends CacheXml70DUnitTest {
     cs.setTcpNoDelay(false);
     RegionAttributesCreation attrs = new RegionAttributesCreation(cache);
     attrs.setDataPolicy(DataPolicy.NORMAL);
-    cache.createVMRegion("rootNORMAL", attrs);
+    cache.createRegionFactory(attrs).create("rootNORMAL");
     testXml(cache);
   }
 
@@ -193,7 +193,7 @@ public class CacheXml80DUnitTest extends CacheXml70DUnitTest {
     cs.setTcpNoDelay(true);
     RegionAttributesCreation attrs = new RegionAttributesCreation(cache);
     attrs.setDataPolicy(DataPolicy.NORMAL);
-    cache.createVMRegion("rootNORMAL", attrs);
+    cache.createRegionFactory(attrs).create("rootNORMAL");
     testXml(cache);
   }
 
@@ -210,8 +210,7 @@ public class CacheXml80DUnitTest extends CacheXml70DUnitTest {
     RegionAttributesCreation attrs = new RegionAttributesCreation(cache);
     attrs.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
     attrs.setDiskStoreName("mydisk");
-
-    cache.createVMRegion("whatever", attrs);
+    cache.createRegionFactory(attrs).create("whatever");
     testXml(cache);
   }
 

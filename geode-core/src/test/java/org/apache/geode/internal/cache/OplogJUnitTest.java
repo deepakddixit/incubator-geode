@@ -2151,7 +2151,7 @@ public class OplogJUnitTest extends DiskRegionTestingBase {
     factory.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
     factory.setScope(Scope.LOCAL);
     try {
-      region = cache.createVMRegion("test", factory.createRegionAttributes());
+      region = cache.createRegionFactory(factory.createRegionAttributes()).create("test");
     } catch (Exception e1) {
       logWriter.error("Test failed due to exception", e1);
       fail("Test failed due to exception " + e1);
@@ -2216,7 +2216,7 @@ public class OplogJUnitTest extends DiskRegionTestingBase {
     factory.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
     factory.setScope(Scope.LOCAL);
     try {
-      region = cache.createVMRegion("test", factory.createRegionAttributes());
+      region = cache.createRegionFactory(factory.createRegionAttributes()).create("test");
     } catch (Exception e1) {
       logWriter.error("Test failed due to exception", e1);
       fail("Test failed due to exception " + e1);
@@ -2284,7 +2284,7 @@ public class OplogJUnitTest extends DiskRegionTestingBase {
     factory.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
     factory.setScope(Scope.LOCAL);
     try {
-      region = cache.createVMRegion("test", factory.createRegionAttributes());
+      region = cache.createRegionFactory(factory.createRegionAttributes()).create("test");
     } catch (Exception e1) {
       logWriter.error("Test failed due to exception", e1);
       fail("Test failed due to exception " + e1);
@@ -2360,7 +2360,7 @@ public class OplogJUnitTest extends DiskRegionTestingBase {
       factory.setDataPolicy(DataPolicy.PERSISTENT_REPLICATE);
       factory.setScope(Scope.LOCAL);
       try {
-        region = cache.createVMRegion("test", factory.createRegionAttributes());
+        region = cache.createRegionFactory(factory.createRegionAttributes()).create("test");
       } catch (Exception e1) {
         logWriter.error("Test failed due to exception", e1);
         fail("Test failed due to exception " + e1);
