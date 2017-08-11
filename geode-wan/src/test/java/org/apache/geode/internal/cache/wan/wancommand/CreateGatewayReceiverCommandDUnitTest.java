@@ -22,6 +22,7 @@ import static org.apache.geode.test.dunit.LogWriterUtils.getLogWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -29,6 +30,7 @@ import org.apache.geode.cache.wan.GatewayReceiver;
 import org.apache.geode.distributed.DistributedMember;
 import org.apache.geode.management.cli.Result;
 import org.apache.geode.management.internal.cli.i18n.CliStrings;
+import org.apache.geode.management.internal.cli.json.GfJsonException;
 import org.apache.geode.management.internal.cli.result.CommandResult;
 import org.apache.geode.management.internal.cli.result.TabularResultData;
 import org.apache.geode.test.dunit.Host;
@@ -257,20 +259,13 @@ public class CreateGatewayReceiverCommandDUnitTest extends WANCommandTestBase {
             + CliStrings.CREATE_GATEWAYRECEIVER__SOCKETBUFFERSIZE + "=512000";
     CommandResult cmdResult = executeCommand(command);
     if (cmdResult != null) {
-      String strCmdResult = commandResultToString(cmdResult);
-      getLogWriter().info("testCreateGatewayReceiver stringResult : " + strCmdResult + ">>>>");
-      assertEquals(Result.Status.OK, cmdResult.getStatus());
-
-      TabularResultData resultData = (TabularResultData) cmdResult.getResultData();
-      List<String> status = resultData.retrieveAllValues("Status");
-      assertEquals(4, status.size());// expected size 4 includes the manager
-                                     // node
-      // verify there is no error in the status
-      for (String stat : status) {
-        assertTrue("GatewayReceiver creation should have failed", stat.contains("ERROR:"));
+      assertEquals(Result.Status.ERROR, cmdResult.getStatus());
+      try {
+        assertEquals("Please specify either start port a value which is less than end port.",
+            ((JSONArray) cmdResult.getContent().get("message")).get(0));
+      } catch (GfJsonException e) {
+        fail("Unable to parse output", e);
       }
-    } else {
-      fail("testCreateGatewayReceiver failed as did not get CommandResult");
     }
   }
 

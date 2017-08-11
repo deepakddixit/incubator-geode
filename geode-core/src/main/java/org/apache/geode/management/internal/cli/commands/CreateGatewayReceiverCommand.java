@@ -75,6 +75,11 @@ public class CreateGatewayReceiverCommand implements GfshCommand {
       @CliOption(key = CliStrings.CREATE_GATEWAYRECEIVER__GATEWAYTRANSPORTFILTER,
           help = CliStrings.CREATE_GATEWAYRECEIVER__GATEWAYTRANSPORTFILTER__HELP) String[] gatewayTransportFilters) {
 
+    if (startPort != null && endPort != null && startPort > endPort) {
+      return ResultBuilder.createUserErrorResult(
+          "Please specify either start port a value which is less than end port.");
+    }
+
     Result result;
 
     AtomicReference<XmlEntity> xmlEntity = new AtomicReference<>();
